@@ -92,7 +92,7 @@ public class DashboardTab {
                 statCard("Occupied", String.valueOf(occupiedRooms), "stat-card-orange"),
                 statCard("Customers", String.valueOf(totalCustomers), "stat-card-red"),
                 statCard("Bookings", String.valueOf(totalBookings), "stat-card-blue"),
-                statCard("Revenue", String.format("₹%.0f", totalRevenue), "stat-card-green")
+                statCard("Revenue", String.format("₹%.0f", totalRevenue), "stat-card-pink")
         );
         row.getChildren().forEach(n -> HBox.setHgrow(n, Priority.ALWAYS));
         return row;

@@ -198,12 +198,16 @@ public class BookingTab {
 
         // Perform booking directly (removed simulated delay thread)
         btnBook.setDisable(true);
-        lblProcessing.setText("Processing booking...");
+lblProcessing.setText("Processing booking...");
 
-        try {
-            String bookingID = bookingService.bookRoom(custID, roomNum, checkIn, checkOut);
-            Booking booking = bookingService.findActiveBookingByRoom(roomNum);
+Thread bookingThread = new Thread(() -> {
+    try {
+        Thread.sleep(1500); // simulated delay — demonstrates multithreading
 
+        String bookingID = bookingService.bookRoom(custID, roomNum, checkIn, checkOut);
+        Booking booking = bookingService.findActiveBookingByRoom(roomNum);
+
+        Platform.runLater(() -> {
             bookingData.setAll(bookingService.getAllBookings());
             roomTab.refresh();
             customerTab.refresh();
@@ -214,16 +218,22 @@ public class BookingTab {
             lblStatus.setText("Booking confirmed! ID: " + bookingID);
             showAlert(Alert.AlertType.INFORMATION, "Booking Confirmed",
                     "Booking ID: " + bookingID + "\nRoom: " + roomNum +
-                    "\nCheck-in: " + checkIn + " | Check-out: " + checkOut +
                     "\nTotal: ₹" + String.format("%.2f", booking != null ? booking.getTotalCost() : 0));
-        } catch (Exception ex) {
+        });
+
+    } catch (Exception ex) {
+        Platform.runLater(() -> {
             btnBook.setDisable(false);
             lblProcessing.setText("");
             lblStatus.setStyle("-fx-text-fill: red;");
             lblStatus.setText("Booking failed: " + ex.getMessage());
-            showAlert(Alert.AlertType.ERROR, "Booking Failed", ex.getMessage());
-        }
+        });
     }
+});
+bookingThread.setDaemon(true);
+bookingThread.start();
+
+}
 
     private void handleCheckout() {
         lblStatus.setStyle("-fx-text-fill: red;");

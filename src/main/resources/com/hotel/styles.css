@@ -269,14 +269,19 @@
 .stat-card-green  { -fx-background-color: #43a047; }
 .stat-card-orange { -fx-background-color: #fb8c00; }
 .stat-card-red    { -fx-background-color: #e53935; }
+.stat-card-pink   { -fx-background-color: #ff69b4; }
 .dark-theme .stat-card-green { -fx-background-color: #2e7d32; }
 .dark-theme .stat-card-orange { -fx-background-color: #e65100; }
 .dark-theme .stat-card-red { -fx-background-color: #c62828; }
+.dark-theme .stat-card-pink { -fx-background-color: #c2185b; }
 
 .stat-card .stat-value {
     -fx-font-size: 28px;
     -fx-font-weight: bold;
     -fx-text-fill: #ffffff;
+}
+.stat-card-pink .stat-value {
+    -fx-font-size: 18px;
 }
 .stat-card .stat-label {
     -fx-font-size: 12px;

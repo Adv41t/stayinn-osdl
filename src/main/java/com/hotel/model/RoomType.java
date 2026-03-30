@@ -1,9 +1,9 @@
 package com.hotel.model;
 
 public enum RoomType {
-    STANDARD(100.0),
-    DELUXE(200.0),
-    SUITE(400.0);
+    STANDARD(1000.0),
+    DELUXE(2000.0),
+    SUITE(4000.0);
 
     private final double basePricePerNight;
 
